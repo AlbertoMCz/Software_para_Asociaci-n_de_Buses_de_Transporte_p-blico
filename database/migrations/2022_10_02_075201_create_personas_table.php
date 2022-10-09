@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreatePersonasTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations. obs
      *
      * @return void
      */
