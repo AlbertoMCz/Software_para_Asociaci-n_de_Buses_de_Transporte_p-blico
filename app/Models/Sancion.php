@@ -7,5 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sancion extends Model
 {
-    use HasFactory;
+    public $timestamps = false;
+    protected $table = 'sancions';
+    protected $fillable = ['detalle','montoApagar'];
+
+    public function asignacionsancion()
+    {
+        //return $this->hasMany(Asignacion::class,)
+    }
 }

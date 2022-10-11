@@ -14,7 +14,8 @@ class SancionController extends Controller
      */
     public function index()
     {
-        //
+        $sanciones = Sancion::all();
+        return view('sancion.index',['sanciones'=>$sanciones]);
     }
 
     /**
@@ -24,7 +25,7 @@ class SancionController extends Controller
      */
     public function create()
     {
-        //
+       return view('sancion.create');
     }
 
     /**
@@ -35,7 +36,12 @@ class SancionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sancion = new Sancion();
+        $sancion->detalle = $request->input('detalle');
+        $sancion->montoApagar = $request->input('montoApagar');
+        $sancion->save();
+        echo $sancion;
+
     }
 
     /**
