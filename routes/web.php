@@ -43,3 +43,6 @@ Route::group(['prefix'=>'tipoAsignacion'],function(){
 
 Route::resource('persona', PersonaController::class);
 Route::resource('micro', MicroController::class);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

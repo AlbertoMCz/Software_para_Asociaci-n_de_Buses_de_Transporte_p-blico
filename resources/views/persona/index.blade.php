@@ -50,7 +50,7 @@
                         <td>{{$persona->apellido}}</td>
                         <td>{{$persona->ci}}</td>
                         <td>{{$persona->genero}}</td>
-                        <td>{{$persona->tipoPersona}}</td>
+                        <td>{{$persona->tipo($persona->tipoPersona)}}</td>
                         <td>
                             <form action="{{ route('persona.destroy',$persona->id) }}" method="POST">
                                 {{-- <a class="btn btn-info" href="{{ route('persona.edit',$persona->id) }}">Editar</a> --}}
