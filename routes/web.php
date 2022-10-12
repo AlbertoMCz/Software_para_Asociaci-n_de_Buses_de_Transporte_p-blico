@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SancionController;
+use App\Http\Controllers\Tipo_asignacionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,14 @@ Route::group(['prefix'=>'sancion'],function(){
     Route::get('/create',[SancionController::class,'create'])->name('sancion.create');
     Route::post('/',[SancionController::class,'store'])->name('sancion.store');
     Route::get('/edit/{id}',[SancionController::class,'edit'])->name('sancion.edit');
+    Route::put('/{id}', [SancionController::class, 'update'])->name('sancion.update');
+    Route::get('/{id}',[SancionController::class, 'destroy'])->name('sancion.destroy');
+});
+Route::group(['prefix'=>'tipoAsignacion'],function(){
+    Route::get('/',[Tipo_asignacionController::class,'index'])->name('tipoAsignacion.index');
+    Route::get('/create',[Tipo_asignacionController::class,'create'])->name('tipoAsignacion.create');
+    Route::post('/',[Tipo_asignacionController::class,'store'])->name('tipoAsignacion.store');
+    Route::get('/edit/{id}',[Tipo_asignacionController::class,'edit'])->name('tipoAsignacion.edit');
+    Route::put('/{id}', [Tipo_asignacionController::class, 'update'])->name('tipoAsignacion.update');
+    Route::get('/{id}',[Tipo_asignacionController::class, 'destroy'])->name('tipoAsignacion.destroy');
 });
