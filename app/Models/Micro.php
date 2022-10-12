@@ -7,5 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Micro extends Model
 {
-    use HasFactory;
+    public $timestamps = false;
+    protected $table = 'micros';
+    protected $fillable = ['nroPlaca','nroInterno', 'marca', 'modelo', 'disponible', 'descripcion', 'idSocio'];
+
+    public function socio()
+    {
+        return $this->belongsTo(Socio::class,'idSocio','id');
+    }
 }

@@ -36,7 +36,16 @@ class SancionController extends Controller
      */
     public function store(Request $request)
     {
-        $sancion = new Sancion();
+
+         $data = $request->validate([
+            'detalle' => 'required',
+            'montoApagar' => 'required',
+        ],[
+            'detalle.required'=>'El campo detalle es obligatorio.',
+            'montoApagar.required'=>'El campo Monto a pagar es obligatorio.',
+        ]);
+
+        $sancion = new Sancion($data);
         $sancion->detalle = $request->input('detalle');
         $sancion->montoApagar = $request->input('montoApagar');
         $sancion->save();

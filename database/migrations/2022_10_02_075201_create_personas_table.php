@@ -21,6 +21,7 @@ class CreatePersonasTable extends Migration
             $table->string('ci');
             $table->string('nacionalidad');
             $table->char('genero');
+            $table->char('tipoPersona');
         });
     }
 

@@ -14,19 +14,17 @@ class CreateChofersTable extends Migration
     public function up()
     {
         Schema::create('chofers', function (Blueprint $table) {
-            //$table->bigIncrements('id');
+
             //$table->id();
-            $table->integer('idPersona');
+            $table->integer('id');
             $table->string('nroLicencia');
             $table->char('categoria');
             $table->char('disponible');
-            //$table->integer('persona_id');
 
             //Relacion
-            $table->foreign('idPersona')->references('id')->on('personas')
+            $table->foreign('id')->references('id')->on('personas')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->primary('idPersona');
         });
     }
 

@@ -33,7 +33,7 @@ class CreateAsignacionsTable extends Migration
             $table->foreign('idMicro')->references('id')->on('micros')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->foreign('idChofer')->references('idPersona')->on('chofers')
+            $table->foreign('idChofer')->references('id')->on('chofers')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

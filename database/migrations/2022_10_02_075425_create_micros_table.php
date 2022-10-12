@@ -24,7 +24,7 @@ class CreateMicrosTable extends Migration
             $table->integer('idSocio');
 
             //Relacion
-            $table->foreign('idSocio')->references('idPersona')->on('socios')
+            $table->foreign('idSocio')->references('id')->on('socios')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

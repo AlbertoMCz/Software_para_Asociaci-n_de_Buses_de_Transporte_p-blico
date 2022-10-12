@@ -7,5 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Socio extends Model
 {
-    use HasFactory;
+    public $timestamps = false;
+    protected $table = 'socios';
+    protected $fillable = ['id', 'codigo','email'];
+
+    public function persona()
+    {
+        return $this->belongsTo(Persona::class,'id','id');
+    }
 }

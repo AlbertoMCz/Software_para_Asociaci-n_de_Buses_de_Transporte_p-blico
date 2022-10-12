@@ -14,18 +14,15 @@ class CreateSociosTable extends Migration
     public function up()
     {
         Schema::create('socios', function (Blueprint $table) {
-            //$table->bigIncrements('id');
             //$table->id();
-            $table->integer('idPersona');
+            $table->integer('id');
             $table->string('codigo');
             $table->string('email');
-            //$table->integer('persona_id');
 
             //Relacion
-            $table->foreign('idPersona')->references('id')->on('personas')
+            $table->foreign('id')->references('id')->on('personas')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->primary('idPersona');
         });
     }
 

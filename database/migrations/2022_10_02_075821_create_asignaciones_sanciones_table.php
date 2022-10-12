@@ -19,10 +19,9 @@ class CreateAsignacionesSancionesTable extends Migration
             $table->integer('idSancion');
 
             //Atributos
-            $table->time('horaSalida');
-            $table->time('horaLlegada');
+            //$table->time('horaSalida');
+            //$table->time('horaLlegada');
             $table->string('motivo');
-            //$table->timestamps();
 
             //Relaciones
             $table->foreign('idAsignacion')->references('id')->on('asignacions')

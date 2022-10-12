@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Gentelella Alela! | </title>
+	<title>Asociación de microbuses </title>
 
 	<!-- Bootstrap -->
 	<link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -66,6 +66,8 @@
 									<ul class="nav child_menu">
 										<li><a href="{{ route('sancion.index') }}">Sanción</a></li>
 										<li><a href="{{ route('tipoAsignacion.index') }}">Tipo de asignación</a></li>
+                                        <li><a href="{{ route('persona.index') }}">Personas</a></li>
+                                        <li><a href="{{ route('micro.index') }}">Micros</a></li>
 										<li><a href="index3.html">Dashboard3</a></li>
 									</ul>
 								</li>

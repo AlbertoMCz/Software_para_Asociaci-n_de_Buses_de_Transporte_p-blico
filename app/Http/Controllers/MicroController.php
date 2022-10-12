@@ -3,46 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Models\Micro;
+use App\Models\Socio;
 use Illuminate\Http\Request;
 
 class MicroController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Función que trae y lista todos los registros de la tabla micros.
      */
     public function index()
     {
-        //
+        $micros = Micro::all();
+        return view('micro.index',compact('micros'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Muestra la interfaz gráfica donde se encuentra el formulario con los campos requeridos para registrar un micro.
      */
     public function create()
     {
-        //
+        $socios =Socio::all();
+        return view('micro.create',compact('socios'));
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Valida los datos obtenidos y guarda los datos en la tabla micros.
      */
     public function store(Request $request)
     {
-        //
+        Micro::create($request->all());
+        return redirect()->route('micro.index');
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Micro  $micro
-     * @return \Illuminate\Http\Response
      */
     public function show(Micro $micro)
     {
@@ -51,35 +45,33 @@ class MicroController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Micro  $micro
-     * @return \Illuminate\Http\Response
      */
     public function edit(Micro $micro)
     {
-        //
+        $socios =Socio::all();
+        return view('micro.edit',compact('micro','socios'));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Micro  $micro
-     * @return \Illuminate\Http\Response
+     * Actualiza los datos del microbus, insertado en el formulario de modificar.
      */
     public function update(Request $request, Micro $micro)
     {
-        //
+        request()->validate([
+            'nroPlaca'=>'required',
+            'nroInterno'=>'required',
+            'idSocio'=>'required',
+        ]);
+        $micro->update($request->all());
+        return redirect()->route('micro.index');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Micro  $micro
-     * @return \Illuminate\Http\Response
+     * Elimina un registro de un micro seleccionado de la base de datos.
      */
     public function destroy(Micro $micro)
     {
-        //
+        $micro->delete();
+        return redirect()->route('micro.index');
     }
 }

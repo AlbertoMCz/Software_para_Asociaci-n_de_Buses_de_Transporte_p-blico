@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SancionController;
 use App\Http\Controllers\Tipo_asignacionController;
+use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\MicroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +40,6 @@ Route::group(['prefix'=>'tipoAsignacion'],function(){
     Route::put('/{id}', [Tipo_asignacionController::class, 'update'])->name('tipoAsignacion.update');
     Route::get('/{id}',[Tipo_asignacionController::class, 'destroy'])->name('tipoAsignacion.destroy');
 });
+
+Route::resource('persona', PersonaController::class);
+Route::resource('micro', MicroController::class);

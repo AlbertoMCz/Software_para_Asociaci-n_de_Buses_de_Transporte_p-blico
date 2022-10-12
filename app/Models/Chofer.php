@@ -7,5 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Chofer extends Model
 {
-    use HasFactory;
+    public $timestamps = false;
+    protected $table = 'chofers';
+    protected $fillable = ['id', 'nroLicencia','categoria', 'disponible'];
+
+    public function persona()
+    {
+        return $this->belongsTo(Persona::class,'id','id');
+    }
 }
