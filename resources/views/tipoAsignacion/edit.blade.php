@@ -5,7 +5,7 @@
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
-							<h3>Crear Sanción</h3>
+							<h3>Modificar Tipo de Asignación</h3>
 						</div>
 					</div>
 					<div class="clearfix"></div>
@@ -13,7 +13,7 @@
 						<div class="col-md-12 col-sm-12 ">
 							<div class="x_panel">
 								<div class="x_title">
-									<h2>Sanción </h2>
+									<h2>Tipo de Asignación </h2>
 									<ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 										</li>
@@ -24,21 +24,21 @@
 								</div>
 								<div class="x_content">
 									<br />
-									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{{ route('sancion.update',[$sancion->id]) }}" method="post" >
+									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{{ route('tipoAsignacion.update',[$tipoAsignacion->id]) }}" method="post" >
                                     @csrf
                                     @method('PUT')
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="nombre">Nombre <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="nombre" name="nombre" required="required" class="form-control " value="{{$tipoAsignacion->nombre}}">
+											</div>
+										</div>
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="detalle">Detalle <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="detalle" name="detalle" required="required" class="form-control " value="{{$sancion->detalle}}">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="montoApagar">Monto a pagar <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="number" step='0.01' id="montoApagar" name="montoApagar" required="required" class="form-control" value="{{$sancion->montoApagar}}">
+												<input type="text" id="detalle" name="detalle" required="required" class="form-control" value="{{$tipoAsignacion->detalle}}">
 											</div>
 										</div>
 										
