@@ -40,8 +40,8 @@ class SancionController extends Controller
         $sancion->detalle = $request->input('detalle');
         $sancion->montoApagar = $request->input('montoApagar');
         $sancion->save();
-        echo $sancion;
-
+        
+        return redirect()->route('sancion.index');
     }
 
     /**
@@ -63,7 +63,7 @@ class SancionController extends Controller
      */
     public function edit(Sancion $sancion)
     {
-        //
+        return view('sancion.edit',['sancion'=>$sancion]);
     }
 
     /**
