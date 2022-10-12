@@ -40,10 +40,13 @@
                 <tbody>
                 @foreach ($sanciones as $sancion)
                 <tr>
-                    <th scope="row">{{$sabcion->id}}</th>
+                    <th scope="row">{{$sancion->id}}</th>
                     <td>{{$sancion->detalle}}</td>
                     <td>{{$sancion->montoApagar}}</td>
-                    <td>@mdo</td>
+                    <td>
+            <a href="{{ route('sancion.edit',[$sancion->id]) }}" class="btn btn-outline-warning btn-m" ><span><i class="fa fa-edit" style="margin-left:-5px;"></i></span></a>
+            <a href="" class="btn btn-outline-danger btn-m" ><span><i class="fa fa-eraser" style="margin-left:-5px;"></i></span></a>
+         </td>
                 </tr>
                 @endforeach
                 </tbody>

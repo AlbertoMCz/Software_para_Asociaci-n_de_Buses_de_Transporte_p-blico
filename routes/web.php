@@ -25,4 +25,5 @@ Route::group(['prefix'=>'sancion'],function(){
     Route::get('/',[SancionController::class,'index'])->name('sancion.index');
     Route::get('/create',[SancionController::class,'create'])->name('sancion.create');
     Route::post('/',[SancionController::class,'store'])->name('sancion.store');
+    Route::get('/edit/{id}',[SancionController::class,'edit'])->name('sancion.edit');
 });
