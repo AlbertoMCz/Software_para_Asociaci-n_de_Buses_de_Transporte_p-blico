@@ -53,14 +53,10 @@
                         <td>{{$persona->tipo($persona->tipoPersona)}}</td>
                         <td>
                             <form action="{{ route('persona.destroy',$persona->id) }}" method="POST">
-                                {{-- <a class="btn btn-info" href="{{ route('persona.edit',$persona->id) }}">Editar</a> --}}
                                 <a href="{{ route('persona.edit',$persona->id) }}" class="btn btn-outline-warning btn-m" ><span><i class="fa fa-edit" style="margin-left:-5px;"></i></span></a>
-
                                 @csrf
                                 @method('DELETE')
-                                 <button type="submit" class="btn btn-danger">Borrar</button>
-                                {{-- <a class="btn btn-outline-danger btn-m" ><span><i class="fa fa-eraser" style="margin-left:-5px;"></i></span></a> --}}
-
+                                 <button type="submit" class="btn btn-outline-danger btn-m" ><span><i class="fa fa-eraser" style="margin-left:-5px;"></i></span></button>
                             </form>
                         </td>
                     </tr>

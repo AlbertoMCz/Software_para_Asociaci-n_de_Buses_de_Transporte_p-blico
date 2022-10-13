@@ -57,12 +57,14 @@ class MicroController extends Controller
      */
     public function update(Request $request, Micro $micro)
     {
+        //return dd($request);
         request()->validate([
             'nroPlaca'=>'required',
             'nroInterno'=>'required',
             'idSocio'=>'required',
         ]);
         $micro->update($request->all());
+        ($request->disponible == 1)? '' : $micro->update(['disponible' => 0]);
         return redirect()->route('micro.index');
     }
 

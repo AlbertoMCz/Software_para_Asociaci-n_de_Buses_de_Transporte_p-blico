@@ -66,12 +66,13 @@
 											</div>
 										</div>
 
-
 										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="idSocio">Socio
+												<span class="required">*</span>
+											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<label>Seleccionar dueño (Socio): </label>
-												<select name="idSocio" class="form-control">
-													<option value="">Seleccione una opción</option>
+												<select class="form-control" id="idSocio" name="idSocio" required>
+													<option value="">Seleccionar dueño (Socio):</option>
 													@foreach($socios as $socio)
 														<option value="{{$socio->id}}">{{$socio->persona->nombre}} {{$socio->persona->apellido}}</option>
 													@endforeach
@@ -79,20 +80,18 @@
 											</div>
 										</div>
 
-										<div class="col-md-6 col-sm-6 ">
-											<div class="checkbox">
-												<label>
-													<input type="checkbox" class="flat" name="disponible" value="1" checked="checked"> Disponible
-												</label>
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="disponible"> ¿Disponible?
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="checkbox" class="flat" name="disponible" value="1">
 											</div>
 										</div>
-
-										<br></br>
 										
 										<div class="ln_solid"></div>
 										<div class="item form-group">
 											<div class="col-md-6 col-sm-6 offset-md-3">
-												<button type="submit" class="btn btn-success">Enviar</button>
+												<button type="submit" class="btn btn-success">Registrar</button>
 											</div>
 										</div>
 

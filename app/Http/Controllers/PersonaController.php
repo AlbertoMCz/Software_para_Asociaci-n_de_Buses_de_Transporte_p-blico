@@ -6,6 +6,8 @@ use App\Models\Chofer;
 use App\Models\Persona;
 use App\Models\Socio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class PersonaController extends Controller
 {
@@ -23,12 +25,16 @@ class PersonaController extends Controller
      */
     public function create()
     {
-        $tipoPersona = [
-            'Socio' => 'S',
-            'Chofer' => 'C'
-        ];
+        $genero = collect([
+            ['abreviatura' => 'M', 'tipo' => 'Masculino'],
+            ['abreviatura' => 'F', 'tipo' => 'Femenino'],
+        ]);
 
-        return view('persona.create',compact('tipoPersona'));
+        $socios = Socio::all();
+        $generos = ['M' => 'Masculino', 'F' => 'Femenino'];
+        $generos = collect($generos);
+
+        return view('persona.create',compact('socios','generos'));
     }
 
     /**
@@ -36,8 +42,8 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
-        /*Opcion 1 para guardar un registro de manera manual*/
-
+        //return dd($request);
+        /*Opcion 1 para guardar un registro de manera manual
         $persona = new Persona();
         $persona->nombre = $request->get('nombre');
         $persona->apellido = $request->get('apellido');
@@ -47,15 +53,18 @@ class PersonaController extends Controller
         $persona->genero = $request->get('genero');
         ($request->has('Socio') ? $persona->tipoPersona="S" : ($request->has('Chofer')) ? $persona->tipoPersona="C" : '');
         $persona->save();
+        */
 
-        if ($request->has('Socio')){
+        /*Opcion 2 para guardar un registro*/
+        $persona = Persona::create($request->all());
+
+        if ($persona->tipoPersona=="S"  ){
             $socio = new Socio();
             $socio->id =$persona->id;
             $socio->codigo = $request->get('codigo');
             $socio->email = $request->get('email');
             $socio->save();
-        }
-        if ($request->has('Chofer')){
+        }elseif ($persona->tipoPersona=="C"){
             $chofer= new Chofer();
             $chofer->id =$persona->id;
             $chofer->nroLicencia = $request->get('nroLicencia');
@@ -63,26 +72,26 @@ class PersonaController extends Controller
             $chofer->disponible = $request->get('disponible');
             $chofer->save();
         }
-
-        /*Opcion 2 para guardar un registro*/
-        //Persona::create($request->all());
         return redirect()->route('persona.index');
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Persona $persona)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified resource. 1319005
      */
     public function edit(Persona $persona)
     {
-        return view('persona.edit',compact('persona'));
+        $generos = ['M' => 'Masculino', 'F' => 'Femenino'];
+        $generos = collect($generos);
+
+        $socio = Socio::where('id','=', $persona->id)->first();
+        $chofer = Chofer::where('id','=', $persona->id)->first();
+
+        $personaCargo = DB::table('personas')
+            ->join('socios', 'socios.id', '=', 'personas.id')
+            ->join('chofers', 'chofers.id', '=', 'personas.id')
+            ->where('personas.id', '=', $persona);
+
+        return view('persona.edit',compact('persona', 'generos','socio','chofer'));
     }
 
     /**
@@ -99,8 +108,22 @@ class PersonaController extends Controller
         ]);
 
         $persona->update($request->all());
-        ($request->has('Socio') ? $persona->tipoPersona="S" : ($request->has('Chofer')) ? $persona->tipoPersona="C" : '');
-        $persona->save();
+
+        $socio = Socio::find($persona->id);
+        $chofer = Chofer::find($persona->id);
+        ($socio)? $socio->delete(): '';
+        ($chofer)? $chofer->delete(): '';
+
+        (Str::startsWith($request->tipoPersona, 'S') Or (Str::startsWith($request->tipoPersona, 'C')))? '' : $persona->update(['tipoPersona' => null]);
+        //$persona->update($request->tipoPersona)
+
+        if(Str::startsWith($request->tipoPersona, 'S')){
+            Socio::create($request->all()+['id' => $persona->id]);
+        }elseif (Str::startsWith($request->tipoPersona, 'C')){
+            Chofer::create($request->all()+['id' => $persona->id]);
+        }
+
+            //(Str::startsWith($request->tipoPersona, 'S'))? Socio::create($request->all()+['id' => $persona->id]) : (Str::startsWith($request->tipoPersona, 'C'))? Chofer::create($request->all()+['id' => $persona->id]) : '';
         return redirect()->route('persona.index');
     }
 

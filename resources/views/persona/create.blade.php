@@ -69,62 +69,64 @@
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="genero">Género <span class="required">*</span>
 											</label>
-											<select class="col-md-6 col-sm-6 " id="genero" name="genero" required>
-												<option value="">Seleccionar género</option>
-												<option value="M">Masculino</option>
-												<option value="F">Femenino</option>
-											</select>
+											<div class="col-md-6 col-sm-6 ">
+												<select name="genero" class="form-control" id="genero" name="genero" required>
+													<option value="">Seleccione una opción</option>
+													@foreach($generos as $genero)
+														<option value="{{$genero}}">{{$genero}}</option>
+													@endforeach
+												</select>
+											</div>
 										</div>
 
-
+										{{-- ATRIBUTOS DEL SOCIO --}}
 										<div class="item form-group">
 											<div class="col-md-6 col-sm-6 ">
 												<div class="checkbox">
 													<label>
-														<input type="checkbox" id="Socio" onchange="toggle()" onclick="uncheck()" name="Socio" value="S" checked>
+														<input type="checkbox" id="socio" onclick="cambiosDeEstado()" name="tipoPersona" value="S">
 													Socio</label>
 												</div>
 
 												<div class="item form-group">
 													<label class="col-form-label col-md-2 col-sm-2 label-align" for="codigo">Código <span class="required">*</span></label>
 													<div class="col-md-6 col-sm-6 ">
-														<input type="text" id="codigo" name="codigo" onfocus="protegeCampo(this)" class="form-control ">
+														<input type="text" id="codigo" name="codigo" class="form-control">
 													</div>
 												</div>
 												<div class="item form-group">
 													<label class="col-form-label col-md-2 col-sm-2 label-align" for="email">Email <span class="required">*</span></label>
 													<div class="col-md-6 col-sm-6 ">
-														<input type="text" id="email" name="email" onfocus="protegeCampo(this)" class="form-control ">
+														<input type="text" id="email" name="email" class="form-control">
 													</div>
 												</div>
 											</div>
 
+
+											{{-- ATRIBUTOS DEL CHOFER --}}
 											<div class="col-md-6 col-sm-6 ">
 												<div class="checkbox">
 													<label>
-														<input type="checkbox" id="Chofer" onchange="toggle2()" onclick="uncheck()" name="Chofer" value="C">
+														<input type="checkbox" id="chofer" onclick="cambiosDeEstado()" name="tipoPersona" value="C">
 													Chofer</label>
 												</div>
 
 												<div class="item form-group">
-													<label class="col-form-label col-md-2 col-sm-2 label-align" for="nroLicencia">Nro. de licencia <span class="required">*</span></label>
+													<label class="col-form-label col-md-3 col-sm-3 label-align" for="nroLicencia">Nro. de licencia <span class="required">*</span></label>
 													<div class="col-md-6 col-sm-6 ">
-														<input type="text" id="nroLicencia" name="nroLicencia" onfocus="bloquearCamposChofer(this)"  class="form-control ">
+														<input type="text" id="nroLicencia" name="nroLicencia" class="form-control">
 													</div>
 												</div>
 												<div class="item form-group">
-													<label class="col-form-label col-md-2 col-sm-2 label-align" for="categoria">Categoría <span class="required">*</span></label>
+													<label class="col-form-label col-md-3 col-sm-3 label-align" for="categoria">Categoría <span class="required">*</span></label>
 													<div class="col-md-6 col-sm-6 ">
-														<input type="text" id="categoria" name="categoria" onfocus="bloquearCamposChofer(this)"  class="form-control ">
+														<input type="text" id="categoria" name="categoria" class="form-control">
 													</div>
 												</div>
 												<div class="item form-group">
-													<label class="col-form-label col-md-2 col-sm-2 label-align" for="categoria">Disponible <span class="required">*</span></label>
-													<div class="col-md-6 col-sm-6 ">
-														<select class="col-md-6 col-sm-6 " id="disponible" name="disponible" onfocus="bloquearCamposChofer(this)" required>
-															<option value="SI">SI</option>
-															<option value="NO">NO</option>
-														</select>
+													<label class="col-form-label col-md-3 col-sm-3 label-align" for="disponible">Disponible <span class="required">*</span></label>
+													<div class="col-md-6 col-sm-6">
+														<input type="checkbox" id="disponible" name="disponible" value="1" checked disabled>
 													</div>
 												</div>
 
@@ -134,11 +136,12 @@
 										<div class="ln_solid"></div>
 										<div class="item form-group">
 											<div class="col-md-6 col-sm-6 offset-md-3">
-												<button type="submit" class="btn btn-success">Enviar</button>
+												<button type="submit" class="btn btn-success">Registrar</button>
 											</div>
 										</div>
 
 									</form>
+
 								</div>
 							</div>
 						</div>
@@ -149,34 +152,27 @@
             @endsection
 
 <script>
-    proteger=false;
-    function protegeCampo(cmp){
-        if (proteger) cmp.blur();
-    }
-    function toggle(){
-        if (proteger) proteger=false; else proteger=true;
-    }
-    bloquear=false;
-    function bloquearCamposChofer(cmp){
-        if (bloquear) cmp.blur();
-    }
-    function toggle2(){
-        if (bloquear) bloquear=false; else bloquear=true;
-    }
-
-    //Seleccionar un solo checkbox
-    function uncheck(){
-        var checkbox1 = document.getElementById("Socio");
-        var checkbox2 = document.getElementById("Chofer");
-        checkbox1.onclick = function(){
-            if(checkbox1.checked != false){
-                checkbox2.checked =null; }
+    function cambiosDeEstado() {
+        var socio = document.getElementById("socio");
+        var chofer = document.getElementById("chofer");
+        var disponible = document.getElementById("disponible");
+        var nroLicencia = document.getElementById("nroLicencia");
+        var categoria = document.getElementById("categoria");
+        var codigo = document.getElementById("codigo");
+        var email = document.getElementById("email");
+        socio.onclick = function(){
+            if(socio.checked){
+                chofer.checked = null;
+                disponible.checked = null; disponible.disabled = socio.checked; codigo.disabled = false; email.disabled = false;
+                nroLicencia.disabled = true; nroLicencia.value = ""; categoria.disabled = true; categoria.value = "";
+            }
         }
-        checkbox2.onclick = function(){
-            if(checkbox2.checked != false){
-                checkbox1.checked=null;
+        chofer.onclick = function(){
+            if(chofer.checked){
+                socio.checked = null;
+                disponible.disabled = false; disponible.checked = true; nroLicencia.disabled = false; categoria.disabled = false;
+                codigo.disabled = true; codigo.value = ""; email.disabled = true; email.value = "";
             }
         }
     }
-
 </script>

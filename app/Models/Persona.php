@@ -19,4 +19,14 @@ class Persona extends Model
         //return ($tipoPersona = 'S'  ? "Socio" : ($tipoPersona = 'C' ? "Chofer" : "Sin Rol"));
     }
 
+    public function checkedS($tipoPersona)
+    {
+        return (Str::startsWith($tipoPersona, 'S')? 'checked' : '');
+    }
+
+    public function checkedC($tipoPersona)
+    {
+        return (Str::startsWith($tipoPersona, 'C')? 'checked' : '');
+    }
+
 }
