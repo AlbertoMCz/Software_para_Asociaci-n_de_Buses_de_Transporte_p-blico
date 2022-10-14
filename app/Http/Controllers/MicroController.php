@@ -36,15 +36,7 @@ class MicroController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Micro $micro)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Muestra la interfaz grafica del formulario de edición para la actualizacion de los datos del micro.
      */
     public function edit(Micro $micro)
     {

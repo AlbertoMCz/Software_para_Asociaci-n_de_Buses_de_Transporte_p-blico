@@ -47,8 +47,7 @@
 							<img src="{{ asset('images/img.jpg') }}" alt="..." class="img-circle profile_img">
 						</div>
 						<div class="profile_info">
-							<span>Welcome,</span>
-							<h2>John Doe</h2>
+							<span>Bienvenido</span>
 						</div>
 					</div>
 
@@ -58,12 +57,13 @@
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+								<li><a><i class="fa fa-home"></i> Dashboard G9 <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
 										<li><a href="{{ route('sancion.index') }}">Sanción</a></li>
 										<li><a href="{{ route('tipoAsignacion.index') }}">Tipo de asignación</a></li>
                                         <li><a href="{{ route('persona.index') }}">Personas</a></li>
                                         <li><a href="{{ route('micro.index') }}">Micros</a></li>
+										<li><a href="{{ route('asignacion.index') }}">Asignaciones</a></li>
 									</ul>
 								</li>
 							</ul>

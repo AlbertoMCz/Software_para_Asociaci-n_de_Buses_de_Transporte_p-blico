@@ -137,6 +137,8 @@ class PersonaController extends Controller
 
         /*Opcion 2 para eliminar un registro */
         $persona->delete();
+        (Socio::find($persona->id))? (Socio::find($persona->id))->delete(): '';
+        (Chofer::find($persona->id))? (Chofer::find($persona->id))->delete(): '';
         return redirect()->route('persona.index');
     }
 }

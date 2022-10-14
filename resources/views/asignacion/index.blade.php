@@ -5,7 +5,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Micros
+                    <h3>Asignaciones
                         <small></small>
                     </h3>
                 </div>
@@ -17,9 +17,9 @@
 
         <div class="col-md-10 col-sm-10  ">
             <div class="x_panel">
-                <a type="button" href="{{route('micro.create')}}" class="btn btn-primary">Registrar</a>
+                <a type="button" href="{{route('asignacion.create')}}" class="btn btn-primary">Registrar asignación</a>
                 <div class="x_title">
-                    <h2>Listado de micros
+                    <h2>Listado de asignaciones
                         <small></small>
                     </h2>
                     <ul class="nav navbar-right panel_toolbox">
@@ -36,26 +36,28 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Dueño (Socio)</th>
-                            <th>Nro. de Placa</th>
-                            <th>Nro. Interno</th>
-                            <th>Marca</th>
+                            <th>Nombre Chofer</th>
+                            <th>Micro</th>
+                            <th>Tipo de asignación</th>
+                            <th>Fecha Inicio</th>
+                            <th>Fecha Fin</th>
                             <th>Accion</th>
                         </tr>
                         </thead>
 
                         <tbody>
-                        @foreach ($micros as $micro)
+
+                        @foreach ($asignaciones as $asignacion)
                             <tr>
-                                <th scope="row">{{$micro->id}}</th>
-                                <td>{{$micro->socio->persona->nombre}}  {{$micro->socio->persona->apellido}}</td>
-                                <td>{{$micro->nroPlaca}}</td>
-                                <td>{{$micro->nroInterno}}</td>
-                                <td>{{$micro->marca}}</td>
+                                <th scope="row">{{$asignacion->id}}</th>
+                                <td>{{$asignacion->chofer->persona->nombre}} {{$asignacion->chofer->persona->apellido}}</td>
+                                <td>{{$asignacion->micro->nroInterno}}</td>
+                                <td>{{$asignacion->tipoAsignacion->nombre}}</td>
+                                <td>{{$asignacion->fechaInicio}}</td>
+                                <td>{{$asignacion->fechaFin}}</td>
                                 <td>
-                                    <form action="{{ route('micro.destroy',$micro->id) }}" method="POST">
-                                        {{-- <a class="btn btn-info" href="{{ route('persona.edit',$persona->id) }}">Editar</a> --}}
-                                        <a href="{{ route('micro.edit',$micro->id) }}"
+                                    <form action="{{ route('asignacion.destroy',$asignacion->id) }}" method="POST">
+                                        <a href="{{ route('asignacion.edit',$asignacion->id) }}"
                                            class="btn btn-outline-warning btn-m"><span><i class="fa fa-edit"
                                                                                           style="margin-left:-5px;"></i></span></a>
                                         @csrf
@@ -67,6 +69,7 @@
                                 </td>
                             </tr>
                         @endforeach
+
                         </tbody>
                     </table>
 

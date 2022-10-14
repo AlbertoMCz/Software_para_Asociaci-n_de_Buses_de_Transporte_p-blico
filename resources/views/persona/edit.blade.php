@@ -25,7 +25,7 @@
                         <div class="x_content">
                             <br/>
                             <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"
-                                action="{{ route('persona.update',[$persona->id]) }}" method="post" >
+                                  action="{{ route('persona.update',[$persona->id]) }}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="item form-group">
@@ -95,9 +95,6 @@
                                 </div>
 
 
-
-
-
                                 {{-- ATRIBUTOS DEL SOCIO --}}
                                 <div class="item form-group">
                                     <div class="col-md-6 col-sm-6 ">
@@ -105,7 +102,7 @@
                                             <label>
                                                 <input type="checkbox" id="socio" onclick="cambiosDeEstado()"
                                                        name="tipoPersona" value="S"
-                                                       {{$persona->checkedS($persona->tipoPersona)}}
+                                                        {{$persona->checkedS($persona->tipoPersona)}}
                                                 >Socio</label>
                                         </div>
 
@@ -113,14 +110,16 @@
                                             <label class="col-form-label col-md-2 col-sm-2 label-align" for="codigo">Código
                                                 <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 ">
-                                                <input type="text" id="codigo" name="codigo" class="form-control" value=@if($socio){{$socio->codigo}}@endif>
+                                                <input type="text" id="codigo" name="codigo" class="form-control"
+                                                       value=@if($socio){{$socio->codigo}}@endif>
                                             </div>
                                         </div>
                                         <div class="item form-group">
                                             <label class="col-form-label col-md-2 col-sm-2 label-align" for="email">Email
                                                 <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 ">
-                                                <input type="text" id="email" name="email" class="form-control" value=@if($socio){{$socio->email}}@endif>
+                                                <input type="text" id="email" name="email" class="form-control"
+                                                       value=@if($socio){{$socio->email}}@endif>
                                             </div>
                                         </div>
                                     </div>
@@ -141,14 +140,16 @@
                                                         class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 ">
                                                 <input type="text" id="nroLicencia" name="nroLicencia"
-                                                       class="form-control" value=@if($chofer){{$chofer->nroLicencia}}@endif>
+                                                       class="form-control"
+                                                       value=@if($chofer){{$chofer->nroLicencia}}@endif>
                                             </div>
                                         </div>
                                         <div class="item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="categoria">Categoría
                                                 <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 ">
-                                                <input type="text" id="categoria" name="categoria" class="form-control" value=@if($chofer){{$chofer->categoria}}@endif>
+                                                <input type="text" id="categoria" name="categoria" class="form-control"
+                                                       value=@if($chofer){{$chofer->categoria}}@endif>
                                             </div>
                                         </div>
                                         <div class="item form-group">
@@ -188,18 +189,30 @@
         var categoria = document.getElementById("categoria");
         var codigo = document.getElementById("codigo");
         var email = document.getElementById("email");
-        socio.onclick = function(){
-            if(socio.checked){
+        socio.onclick = function () {
+            if (socio.checked) {
                 chofer.checked = null;
-                disponible.checked = null; disponible.disabled = socio.checked; codigo.disabled = false; email.disabled = false;
-                nroLicencia.disabled = true; nroLicencia.value = ""; categoria.disabled = true; categoria.value = "";
+                disponible.checked = null;
+                disponible.disabled = socio.checked;
+                codigo.disabled = false;
+                email.disabled = false;
+                nroLicencia.disabled = true;
+                nroLicencia.value = "";
+                categoria.disabled = true;
+                categoria.value = "";
             }
         }
-        chofer.onclick = function(){
-            if(chofer.checked){
+        chofer.onclick = function () {
+            if (chofer.checked) {
                 socio.checked = null;
-                disponible.disabled = false; disponible.checked = true; nroLicencia.disabled = false; categoria.disabled = false;
-                codigo.disabled = true; codigo.value = ""; email.disabled = true; email.value = "";
+                disponible.disabled = false;
+                disponible.checked = true;
+                nroLicencia.disabled = false;
+                categoria.disabled = false;
+                codigo.disabled = true;
+                codigo.value = "";
+                email.disabled = true;
+                email.value = "";
             }
         }
     }

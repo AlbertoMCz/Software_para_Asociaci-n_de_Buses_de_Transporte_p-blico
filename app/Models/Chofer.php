@@ -11,6 +11,7 @@ class Chofer extends Model
     protected $table = 'chofers';
     protected $fillable = ['id', 'nroLicencia','categoria', 'disponible'];
 
+    //Obtengo los datos del registro relacionado a la tabla persona.
     public function persona()
     {
         return $this->belongsTo(Persona::class,'id','id');

@@ -5,6 +5,7 @@ use App\Http\Controllers\SancionController;
 use App\Http\Controllers\Tipo_asignacionController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\MicroController;
+use App\Http\Controllers\AsignacionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,7 @@ Route::group(['prefix'=>'tipoAsignacion'],function(){
 
 Route::resource('persona', PersonaController::class);
 Route::resource('micro', MicroController::class);
-Auth::routes();
+Route::resource('asignacion', AsignacionController::class);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Auth::routes();
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

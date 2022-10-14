@@ -11,6 +11,7 @@ class Socio extends Model
     protected $table = 'socios';
     protected $fillable = ['id', 'codigo','email'];
 
+    //Obtengo los datos del registro relacionado a la tabla persona.
     public function persona()
     {
         return $this->belongsTo(Persona::class,'id','id');
