@@ -120,7 +120,7 @@
                                         <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="number" step='0.01' id="montoRecaudado" name="montoRecaudado" required="required" class="form-control" value={{$asignacion->montoRecaudado}}>
+                                        <input type="number" step='0.01' id="montoRecaudado" name="montoRecaudado" required="required" class="form-control" value="{{$asignacion->montoRecaudado}}">
                                     </div>
                                 </div>
 
@@ -129,20 +129,20 @@
                                         <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="detalle" name="detalle" value={{$asignacion->detalle}}
-                                                required="required" class="form-control" >
+                                        <input type="text" id="detalle" name="detalle"
+                                                required="required" class="form-control" value="{{$asignacion->detalle}}">
                                     </div>
                                 </div>
-
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="idSancion">Sancion
-                                        <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <select name="idSancion" class="form-control" id="idSancion" required>
+                                        <select name="idSancion" class="form-control" id="idSancion">
                                             <option value="">Seleccione una opción</option>
                                             @foreach($sanciones as $sancion)
-                                                <option value="{{$sancion->id}}">{{$sancion->detalle}} - {{$sancion->montoApagar}} Bs.</option>
+                                                <option value="{{$sancion->id}}"
+                                                        @if($asignacionSanciones){{old('idSancion',$asignacionSanciones->idSancion)== $sancion->id ? 'selected':''}}@endif
+                                                >{{$sancion->detalle}} - {{$sancion->montoApagar}} Bs.</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -153,8 +153,8 @@
                                         <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="motivo" name="motivo" required="required"
-                                               class="form-control">
+                                        <input type="text" id="motivo" name="motivo" class="form-control"
+                                               value="@if($asignacionSanciones){{$asignacionSanciones->motivo}}@endif">
                                     </div>
                                 </div>
 

@@ -9,6 +9,7 @@ use App\Models\Micro;
 use App\Models\Sancion;
 use App\Models\Tipo_asignacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AsignacionController extends Controller
 {
@@ -51,7 +52,9 @@ class AsignacionController extends Controller
         $micros = Micro::all();
         $choferes = Chofer::all();
         $sanciones = Sancion::all();
-        return view('asignacion.edit',compact('asignacion','tipoAsignaciones','micros', 'choferes','sanciones'));
+        //$asignacionSanciones = Asignacion_sancion::all();
+        $asignacionSanciones = DB::table('asignaciones_sanciones')->where('id', $asignacion->id)->first();
+        return view('asignacion.edit',compact('asignacion','tipoAsignaciones','micros', 'choferes','sanciones', 'asignacionSanciones'));
     }
 
     /**
@@ -70,6 +73,8 @@ class AsignacionController extends Controller
             'pagoChofer'=>'required',
         ]);
         $asignacion->update($request->all());
+
+        (Asignacion_sancion::find($asignacion->id))? (Asignacion_sancion::find($asignacion->id))->delete() : '';
 
         $asignacion_sancion= new Asignacion_sancion();
         $asignacion_sancion->id = $asignacion->id;
